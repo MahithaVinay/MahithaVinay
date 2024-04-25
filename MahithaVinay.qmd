@@ -1,8 +1,8 @@
 ---
 title: "Report on Acute Respiratory Infections for Children Under the Age of Five"
 format: html
-date: 25/04/2024
-author: Mahitha Vinay
+date: "2024-04-25"
+author: "Mahitha Vinay"
 execute: 
   echo: false
   warning: false
@@ -251,7 +251,7 @@ fig.update_traces(hovertemplate='%{customdata[0]}<br>Observation Value: %{z}%')
 
 fig.show()
 ```
-observations of ARDs among children under 5 display diverse trends across different countries, indicating significant variability in ARD prevalence globally. The first takeaway from this graph is the infection rates across the countries. We can classify them as follows - 
+Average Observations of ARDs among children under 5 display diverse trends across different countries, indicating significant variability in ARD prevalence globally. The first takeaway from this graph is the infection rates across the countries. We can classify them as follows - 
 
 
 High Infection Rates: Notable countries with high rates of ARD infections among children include Argentina (94.18%), Belarus (91.76%), Bosnia and Herzegovina (88.12%), Cuba (93.81%), Georgia (73.60%), Panama (81.63%), Serbia (91.3%), Ukraine (92.17%), Uruguay (89.9%), Mexico (72.77%), Thailand (82.28%) and Venezuela (72%). 
