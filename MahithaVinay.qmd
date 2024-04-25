@@ -1,6 +1,9 @@
 ---
 title: "Report on Acute Respiratory Infections for Children Under the Age of Five"
 format: html
+theme: cosmo
+backgroundcolor: HoneyDew
+toc: true
 date: "2024-04-25"
 author: "Mahitha Vinay"
 execute: 
@@ -26,14 +29,14 @@ from plotnine.themes import theme_minimal
 import pycountry_convert as pc
 ```
 
+## Introduction
+
 Acute Respiratory Disease (ARD) encompasses a range of infectious and non-infectious respiratory illnesses affecting the upper and lower respiratory tract and poses a significant global health burden, particularly among vulnerable populations. This dashboard's objective is to examine the variables that most significantly affect acute respiratory illnesses in kids under the age of five. We will investigate the relationship between several factors and the incidence of acute respiratory infections by using a dataset that we obtained from the UNICEF website. Time period, country, and sex are the relevant factors. We will analyze the correlations between these variables and the observed percentage prevalence rates in our analysis.
 
+## Graph 1
 ```{python,ECHO=FALSE}
 file_path = r'C:\Users\tejas\Downloads\unicef_indicator_2.csv'
 df = pd.read_csv(file_path)
-```
-
-```{python,ECHO=FALSE}
 import pandas as pd
 from plotnine import ggplot, aes, geom_point, stat_smooth, theme_bw, labs
 
@@ -62,6 +65,7 @@ print(scatter_plot + theme(figure_size=(10, 6)))
 
 This time series graph depicts trends in Acute Respiratory Infection (ARI) prevalence among children under five. The x-axis represents time, while the y-axis shows the percentage of ARD observations. The graph reveals diverse patterns. Some lines show a consistent increase in ARD observations over time, while others show a decrease. There are also lines with a fluctuating trend, indicating periods with higher and lower observations throughout the timeframe.
 
+## Graph 2
 ```{python,ECHO=FALSE}
 # Function to get continent name from country name
 def get_continent(country_name):
@@ -111,6 +115,7 @@ This graph displays the average observations of Acute Respiratory Diseases (ARD)
 
 Several lines appear on the graph, each representing the trend in ARD observations over time. We can confidently say that there's no single dominant trend for all the lines. Some lines show a clear upward trend, indicating increasing ARD observations over the years. Conversely, other lines display a downward trend, suggesting a decrease in ARD observations over time. There are also lines with a fluctuating pattern, with distinct peaks and valleys throughout the years.
 
+## Graph 3
 ```{python,ECHO=FALSE}
 import pandas as pd
 from plotnine import ggplot, aes, geom_point, geom_smooth, theme_bw, labs, theme
@@ -144,6 +149,7 @@ This graph displays the distribution of average observations of acute respirator
 
 The graph depicts a distribution with several peaks and valleys. There seems to be a concentration of countries with moderate ARD observations (around the center of the x-axis), with a tapering off towards both very high and very low ARD observations.
 
+## Graph 4
 ```{python,ECHO=FALSE}
 import pandas as pd
 from plotnine import ggplot, aes, geom_bar, theme_bw, labs, theme
@@ -172,6 +178,7 @@ This graph displays the distribution of average observations of Acute Respirator
 
 The data reveals a non-uniform distribution of ARD observations across countries. There appears to be a peak around a certain percentage of ARD observations (we can't determine the exact value without the axis labels), suggesting a concentration of countries with a similar prevalence of ARD in children. The distribution then tapers off towards both ends of the x-axis, indicating a decline in the number of countries with very high or very low ARD observations.
 
+## Graph 5
 ```{python,ECHO=FALSE}
 import pandas as pd
 from plotnine import ggplot, aes, geom_point, geom_smooth, theme_bw, labs, theme
@@ -201,6 +208,7 @@ This scatter plot depicts the relationship between two factors influencing Acute
 
 Several data points are scattered throughout the graph, indicating a variety of observations. It's difficult to discern a clear linear relationship between the two factors. Some data points show high ARD observations coinciding with high values on the x-axis, while others show high ARD observations at lower values on the x-axis. There seems to be a spread of data points across the entire range of both axes.
 
+## Graph 6
 ```{python,ECHO=FALSE}
 # Load the data from the uploaded CSV file
 file_path = r'C:\Users\tejas\Downloads\unicef_indicator_2.csv'
@@ -268,6 +276,6 @@ Low Infection Rates: Some countries exhibit relatively lower rates of ARD infect
 
 This graph also allows us to draw a link between countries and infection rates. Examining acute respiratory disease (ARD) prevalence rates across countries unveils distinct regional patterns. Countries in sub-Saharan Africa, such as Angola, Benin, and Burkina Faso, showcase elevated ARD prevalence rates compared to other regions. This suggests common regional factors, including environmental conditions, healthcare infrastructure, and socio-economic status, contributing to this trend. Surprisingly, disparities emerge when correlating ARD prevalence rates with economic indicators. Higher-income countries like Argentina and Cuba demonstrate relatively higher ARD prevalence rates, while lower-income countries like Botswana and Somalia exhibit lower rates. This complex relationship challenges the assumption of a straightforward correlation between economic development and health outcomes. Furthermore, countries with robust healthcare infrastructure, such as Costa Rica and Thailand, coexist with high ARD prevalence rates, raising questions about healthcare access and quality. Environmental factors, including air quality and sanitation, also influence ARD prevalence rates, with countries like Bangladesh and India showing higher rates due to population density and pollution. Conversely, countries with better environmental conditions, like Bhutan and Mongolia, exhibit lower ARD prevalence rates. Additionally, socio-cultural factors and health behaviors play a significant role, as evidenced by variations in ARD prevalence rates between countries like Japan and South Korea, with high health literacy and vaccination coverage, and those like Afghanistan and Niger, with lower health literacy and limited healthcare access.
 
-Conclusion
+## Conclusion
 
 We can sum up by stating that this analysis highlights the intricate interactions between many factors that affect the prevalence rates of ARD in different nations. Although gender does not appear to be a key driver, geographical differences and variations in prevalence rates over time demonstrate the complex nature of the burden associated with ARD. These results highlight the necessity of focused public health initiatives that go beyond merely resolving economic inequality. Considering broader social, environmental, and healthcare-related issues is necessary to successfully reduce the global burden of ARDs in children.Addressing the root causes of ARD prevalence requires a holistic approach that considers the interconnectedness of factors such as environmental pollution, access to quality healthcare, socio-economic status, and cultural practices. For instance, in regions with poor air quality and inadequate sanitation, efforts to improve environmental conditions and promote hygiene practices can help reduce the incidence of ARDs. Similarly, investments in healthcare infrastructure, including access to vaccinations, diagnostic tools, and treatment services, are essential for early detection and management of ARDs. Furthermore, social determinants of health, such as education, income inequality, and housing conditions, play a crucial role in shaping ARD prevalence rates. Targeted interventions aimed at improving health literacy, reducing poverty, and providing safe living environments can contribute to long-term reductions in ARD burden. Additionally, promoting behavioral changes, such as smoking cessation and breastfeeding promotion, can further reduce the risk of ARDs among children. In conclusion, addressing the complex challenges associated with ARD prevalence requires a comprehensive approach that integrates interventions across multiple sectors. By addressing social, environmental, and healthcare-related factors in tandem, policymakers and public health practitioners can work towards achieving significant reductions in ARD burden and improving the overall health and well-being of children worldwide.
