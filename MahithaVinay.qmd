@@ -1,0 +1,226 @@
+---
+title: "Report on Acute Respiratory Infections for Children Under the Age of Five"
+format: html
+---
+
+```{python}
+import pandas as pd
+import plotly.express as px
+import os
+import matplotlib.pyplot as plt
+from mpl_toolkits.basemap import Basemap
+import seaborn as sns
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+from matplotlib.colors import ListedColormap
+from sklearn.linear_model import LinearRegression
+import numpy as np
+from plotnine import ggplot, aes, geom_point, facet_wrap, labs, theme
+from plotnine.themes import theme_minimal
+import pycountry_convert as pc
+```
+
+```{python}
+file_path = r'C:\Users\tejas\Downloads\unicef_indicator_2.csv'
+df = pd.read_csv(file_path)
+```
+
+```{python}
+import pandas as pd
+from plotnine import ggplot, aes, geom_point, stat_smooth, theme_bw, labs
+
+# Sample DataFrame 'df' is assumed to be available
+
+# Convert 'time_period' to datetime if it's not already in datetime format
+df['time_period'] = pd.to_datetime(df['time_period'])
+
+# Convert 'time_period' to numeric representation
+df['time_numeric'] = df['time_period'].astype('int64')
+
+# Define the plot using plotnine
+scatter_plot = (
+    ggplot(df, aes(x='time_numeric', y='obs_value')) +
+    geom_point(color='black') +
+    stat_smooth(method='lm', color='black', se=False) +
+    geom_point(data=df[df['obs_value'] > df['obs_value'].mean()], color='#FF5733') +
+    geom_point(data=df[df['obs_value'] <= df['obs_value'].mean()], color='#6CBB3C') +
+    theme_bw() +
+    labs(title='Observations Through Time', x='Time', y='Observation Value')
+)
+
+# Show the plot
+print(scatter_plot + theme(figure_size=(10, 6)))
+```
+
+```{python}
+# Function to get continent name from country name
+def get_continent(country_name):
+    try:
+        country_alpha2 = pc.country_name_to_country_alpha2(country_name)
+        continent_code = pc.country_alpha2_to_continent_code(country_alpha2)
+        continent_name = pc.convert_continent_code_to_continent_name(continent_code)
+        return continent_name
+    except:
+        return None
+
+# Sample DataFrame 'df' is assumed to be available
+
+# Convert 'time_period' to datetime if it's not already in datetime format
+df['time_period'] = pd.to_datetime(df['time_period'])
+
+# Convert 'time_period' to numeric representation
+df['time_numeric'] = df['time_period'].astype('int64')
+
+# Create a new column 'continent' by mapping countries to continents
+country_to_continent = {}
+for country in df['country'].unique():
+    continent = get_continent(country)
+    if continent:
+        country_to_continent[country] = continent
+
+df['continent'] = df['country'].map(country_to_continent)
+
+# Drop rows where continent is NaN
+df = df.dropna(subset=['continent'])
+
+# Define the plot using plotnine
+scatter_plot = (
+    ggplot(df, aes(x='time_numeric', y='obs_value', color='obs_value > obs_value.mean()')) +
+    geom_point() +
+    facet_wrap('~continent', labeller='label_both', ncol=2, scales='free_y') +  # Adjust ncol for the number of columns
+    theme_minimal() +
+    labs(x='Time', y='Observation Value') +  # Set axis labels for the entire plot
+    theme(figure_size=(10, 6))  # Adjust figure size
+)
+
+# Show the plot
+print(scatter_plot)
+```
+
+```{python}
+import pandas as pd
+from plotnine import ggplot, aes, geom_point, geom_smooth, theme_bw, labs, theme
+
+# Sample DataFrame 'df' is assumed to be available
+
+# Convert 'time_period' to datetime if it's not already in datetime format
+df['time_period'] = pd.to_datetime(df['time_period'])
+
+# Group by 'time_period' and calculate the average of 'obs_value'
+avg_obs_per_time = df.groupby('time_period')['obs_value'].mean().reset_index()
+
+# Convert 'time_period' to numeric representation
+avg_obs_per_time['time_numeric'] = avg_obs_per_time['time_period'].astype('int64')
+
+# Define the plot using plotnine
+scatter_plot = (
+    ggplot(avg_obs_per_time, aes(x='time_numeric', y='obs_value')) +
+    geom_point(color='black') +
+    geom_smooth(method='lm', color='black', se=False) +
+    theme_bw() +
+    labs(title='Average Observations Through Time', x='Time', y='Average Observation Value') +
+    theme(figure_size=(10, 6))  # Adjust the figure size here
+)
+
+# Show the plot
+print(scatter_plot)
+```
+
+```{python}
+import pandas as pd
+from plotnine import ggplot, aes, geom_bar, theme_bw, labs, theme
+
+# Load the data from the uploaded CSV file
+file_path = r'C:\Users\tejas\Downloads\unicef_indicator_2.csv'
+data = pd.read_csv(file_path)
+
+# Group by 'time_period' and 'sex', then calculate the average of 'obs_value'
+avg_obs_per_time_sex = data.groupby(['time_period', 'sex'])['obs_value'].mean().reset_index()
+
+# Define the plot using plotnine
+bar_plot = (
+    ggplot(avg_obs_per_time_sex, aes(x='time_period', y='obs_value', fill='sex')) +
+    geom_bar(stat='identity', position='dodge') +
+    theme_bw() +
+    labs(title='Average Observation Value by Time Period and Sex', x='Time Period', y='Average Observation Value', fill='Sex') +
+    theme(figure_size=(10, 6))  # Adjust the figure size here
+)
+
+# Show the plot
+print(bar_plot)
+```
+
+
+```{python}
+import pandas as pd
+from plotnine import ggplot, aes, geom_point, geom_smooth, theme_bw, labs, theme
+from sklearn.linear_model import LinearRegression
+
+# Load the data from the uploaded CSV file
+file_path = r'C:\Users\tejas\Downloads\unicef_indicator_2.csv'
+data = pd.read_csv(file_path)
+
+# Define the plot using plotnine
+scatter_plot = (
+    ggplot(data, aes(x='time_period', y='obs_value', color='sex')) +
+    geom_point() +
+    geom_smooth(method='lm', se=False, linetype='dashed') +
+    theme_bw() +
+    theme(figure_size=(10, 6)) +  # Adjust the figure size
+    labs(title='Observation Value by Sex and Time Period', x='Time Period', y='Observed Value', color='Sex')
+)
+
+# Show the plot
+print(scatter_plot)
+```
+
+```{python}
+# Load the data from the uploaded CSV file
+file_path = r'C:\Users\tejas\Downloads\unicef_indicator_2.csv'
+df = pd.read_csv(file_path)
+
+# Convert 'time_period' to datetime format
+df['time_period'] = pd.to_datetime(df['time_period'], format='%Y')
+
+# Clean the DataFrame
+df_cleaned = df[['country', 'time_period', 'obs_value']].copy()
+df_cleaned['obs_value'] = df_cleaned['obs_value'].astype(float)
+
+# Create choropleth map
+fig = px.choropleth(
+    df_cleaned,
+    locations='country',
+    locationmode='country names',
+    color='obs_value',
+    hover_name='country',
+    custom_data=['country'],  # Add custom data for country names
+    animation_frame=df_cleaned['time_period'].dt.year,  # Use only the year for animation
+    color_continuous_scale='Reds',  # Change the color scale to Reds
+    title='Percentage of children (under age 5) with acute respiratory infection symptoms'
+)
+fig.update_layout(
+    geo=dict(
+        showframe=False,
+        showcoastlines=False,
+        projection_type='natural earth'  # Use a different projection for the map
+    ),
+    coloraxis_colorbar=dict(
+        title='Observation Value',
+        tickvals=[0, 25, 50, 75, 100]  # Adjust tick values for colorbar
+    ),
+    title_x=0.5,
+    height=600,  # Increase the height of the graph
+    width=800,   # Increase the width of the graph
+    font=dict(
+        family="Arial, sans-serif",  # Change font family
+        size=12,                     # Adjust font size
+        color="black"                # Change font color
+    ),
+    plot_bgcolor='rgba(0,0,0,0)'    # Set plot background color to transparent
+)
+
+# Define hovertemplate to include country name and observation value
+fig.update_traces(hovertemplate='%{customdata[0]}<br>Observation Value: %{z}%')
+
+fig.show()
+```
