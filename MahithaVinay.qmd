@@ -2,7 +2,7 @@
 title: "Report on Acute Respiratory Infections for Children Under the Age of Five"
 format: html
 theme: cosmo
-backgroundcolor: HoneyDew
+backgroundcolor: silver
 toc: true
 date: "2024-04-25"
 author: "Mahitha Vinay"
@@ -31,9 +31,9 @@ import pycountry_convert as pc
 
 ## Introduction
 
-Acute Respiratory Disease (ARD) encompasses a range of infectious and non-infectious respiratory illnesses affecting the upper and lower respiratory tract and poses a significant global health burden, particularly among vulnerable populations. This dashboard's objective is to examine the variables that most significantly affect acute respiratory illnesses in kids under the age of five. We will investigate the relationship between several factors and the incidence of acute respiratory infections by using a dataset that we obtained from the UNICEF website. Time period, country, and sex are the relevant factors. We will analyze the correlations between these variables and the observed percentage prevalence rates in our analysis.
+Acute Respiratory Disease (ARD) encompasses a range of infectious and non-infectious respiratory illnesses affecting the upper and lower respiratory tract and poses a significant global health burden, particularly among vulnerable populations. In this report we embark on a deep dive into the health metrics of our global village, we turn our lens to one of the most sensitive indicators of community well-being: the health of our children. The data, sprawling across continents and decades, reveal not just numbers, but stories—each data point a child, each trend a narrative of public health policies, environmental challenges, and socio-economic conditions. The acute respiratory diseases (ARDs) afflicting children under five serve as a barometer for a multitude of factors impacting young lives. From the highlands of the Andes to the bustling streets of Southeast Asia, these figures map out a world where geography and health intersect in complex patterns. As we parse through the data, analyzing trends and making comparisons, we remember that each percentage reflects a reality lived by the world’s most vulnerable citizens. The following insights, drawn from animated maps and detailed graphs, shed light on this pressing issue, inviting us to explore the intricate tapestry of factors that lead to such diverse health outcomes across our interconnected planet.
 
-## Graph 1
+## Trends in Pediatric Acute Respiratory Infections Over 20 Years
 ```{python,ECHO=FALSE}
 file_path = r'C:\Users\tejas\Downloads\unicef_indicator_2.csv'
 df = pd.read_csv(file_path)
@@ -63,9 +63,15 @@ scatter_plot = (
 print(scatter_plot + theme(figure_size=(10, 6)))
 ```
 
-This time series graph depicts trends in Acute Respiratory Infection (ARI) prevalence among children under five. The x-axis represents time, while the y-axis shows the percentage of ARD observations. The graph reveals diverse patterns. Some lines show a consistent increase in ARD observations over time, while others show a decrease. There are also lines with a fluctuating trend, indicating periods with higher and lower observations throughout the timeframe.
+The displayed graph provides a quantitative narrative of the prevalence of acute respiratory infections (ARI) in children under five years of age, stretching across a timeline from the early 2000 to 2022. The data points represented by the black dots map out the individual observations of ARI percentages at discrete intervals, offering a granular view of the infection's occurrence over time.
 
-## Graph 2
+The red and green dots differentiate the data based on the average infection rate, with red indicating periods where the infection rates exceeded this average, signaling a need for heightened attention. These particular data points could correspond with external health crises, environmental changes, or variations in healthcare delivery that may have contributed to the increased prevalence of ARIs during those times.
+
+In contrast, the green dots represent periods where the infection rates were at or below the average, potentially reflecting the positive impact of public health initiatives, improvements in healthcare access, or natural fluctuations in disease prevalence.
+
+The trend line, a result of linear regression, provides a broader perspective on the trajectory of ARI rates over the examined period. Its slight upward inclination is indicative of an overall increase in ARI percentages over the years, though the trend is not linear and includes periods of both increase and decrease.
+
+## Continent-Wise Pediatric ARI Prevalence and Trends
 ```{python,ECHO=FALSE}
 # Function to get continent name from country name
 def get_continent(country_name):
@@ -111,11 +117,13 @@ scatter_plot = (
 print(scatter_plot)
 ```
 
-This graph displays the average observations of Acute Respiratory Diseases (ARD) in children under five across various years. The x-axis clearly shows time in years, though the specific range isn't provided in the graph itself. The y-axis represents the percentage of ARD observations, but again, the specific range of percentages is not displayed.
+This multi-faceted graph presents the percentage of acute respiratory infections (ARI) in children under five, broken down by continent, with a timeline extending from around the year 2000 to 2022. Each subgraph corresponds to a continent, providing a comparative view of ARI prevalence across different global regions.
 
-Several lines appear on the graph, each representing the trend in ARD observations over time. We can confidently say that there's no single dominant trend for all the lines. Some lines show a clear upward trend, indicating increasing ARD observations over the years. Conversely, other lines display a downward trend, suggesting a decrease in ARD observations over time. There are also lines with a fluctuating pattern, with distinct peaks and valleys throughout the years.
+Red dots in each subgraph signify instances where ARI percentages were above the continent's average, potentially indicating health crises or seasonal epidemics that require in-depth analysis. Conversely, the turquoise dots depict ARI rates at or below the average, which could reflect the efficacy of health measures or natural dips in infection rates.
 
-## Graph 3
+Variations across continents are evident, with certain regions showing denser clusters of red, suggesting more frequent or severe outbreaks. Such disparities underscore the importance of tailored health strategies responsive to each continent's specific challenges.
+
+## Decadal Shifts in Average Acute Respiratory Infection Rates Among Children
 ```{python,ECHO=FALSE}
 import pandas as pd
 from plotnine import ggplot, aes, geom_point, geom_smooth, theme_bw, labs, theme
@@ -145,11 +153,11 @@ scatter_plot = (
 print(scatter_plot)
 ```
 
-This graph displays the distribution of average observations of acute respiratory diseases (ARD) in children under five years old across different countries. The x-axis represents the percentage of ARD observations, but the specific range of percentages isn't labeled on the graph. The y-axis shows the number of countries.
+The graph titled "Average Observations Through Time" illustrates a time series of average acute respiratory infection (ARI) rates in children under five from around 2000 to 2020. The plot features a collection of discrete data points, each representing the mean ARI percentage for a given year, accompanied by a linear trend line.
 
-The graph depicts a distribution with several peaks and valleys. There seems to be a concentration of countries with moderate ARD observations (around the center of the x-axis), with a tapering off towards both very high and very low ARD observations.
+The trend line, ascending from left to right, suggests a gradual increase in the average ARI rate over the two decades. This trend could point to a variety of underlying factors, such as changes in environmental conditions, healthcare access, or data collection methods that have influenced the observed infection
 
-## Graph 4
+## Annual Gender Comparison of Childhood ARI Rates
 ```{python,ECHO=FALSE}
 import pandas as pd
 from plotnine import ggplot, aes, geom_bar, theme_bw, labs, theme
@@ -174,11 +182,13 @@ bar_plot = (
 print(bar_plot)
 ```
 
-This graph displays the distribution of average observations of Acute Respiratory Infections (ARI) among children under five years old in various countries. The x-axis represents the percentage of ARD observations, but the specific range of percentages isn't shown on the graph. The y-axis shows the number of countries.
+This bar chart titled "Average Observation Value by Time Period and Sex" shows the mean rates of acute respiratory infections (ARI) in children under five, segmented by sex over two decades, starting from 2000 until 2020. The bars are color-coded: blue for male, red for female, and green representing the total average that includes both sexes.
 
-The data reveals a non-uniform distribution of ARD observations across countries. There appears to be a peak around a certain percentage of ARD observations (we can't determine the exact value without the axis labels), suggesting a concentration of countries with a similar prevalence of ARD in children. The distribution then tapers off towards both ends of the x-axis, indicating a decline in the number of countries with very high or very low ARD observations.
+The vertical axis indicates the average ARI observation value, likely a percentage, while the horizontal axis marks the time period by year. The chart allows for a comparison across time and between genders. Notably, the green bars (total average) provide a baseline for understanding the overall trend, while the distinct blue and red bars enable a gender-specific analysis.
 
-## Graph 5
+The data seems to suggest a consistency in ARI rates between sexes as the red and blue bars are mostly of similar height for each year. Moreover, there's an observable upward trend in the ARI rates over time for both genders, as evidenced by the gradual increase in the height of the bars. This could imply an increasing prevalence of ARIs or improved reporting and diagnosis over time. The reasons behind this trend, be it environmental factors, socio-economic changes, healthcare accessibility, or reporting practices, would require further investigation.
+
+## Comparative Analysis of Gender-Specific Trends in Childhood Acute Respiratory Infection Rates 
 ```{python,ECHO=FALSE}
 import pandas as pd
 from plotnine import ggplot, aes, geom_point, geom_smooth, theme_bw, labs, theme
@@ -202,13 +212,13 @@ scatter_plot = (
 print(scatter_plot)
 ```
 
-Absolutely! Here's a description of the scatter plot you sent, focusing solely on the data presented in the image:
+The scatter plot titled "Observation Value by Sex and Time Period" portrays individual observations of acute respiratory infections (ARI) rates in children under five, disaggregated by sex from 2000 to 2020. The dots are color-coded by gender: blue for males, red for females, and green for combined data (total), with corresponding dashed trend lines for each category.
 
-This scatter plot depicts the relationship between two factors influencing Acute Respiratory Disease (ARD) in children under five. The x-axis represents one factor, likely a socioeconomic or environmental factor, but the specific variable isn't labeled in the graph. The y-axis represents the percentage of ARD observations.
+These trend lines suggest a general increase in ARI rates over time for both sexes as well as the total population. The density and spread of the dots indicate the variability of ARI rates within each year and across genders. It's noteworthy that the trend lines for both sexes follow a similar trajectory, implying that the increase in ARI rates does not disproportionately affect one gender over the other.
 
-Several data points are scattered throughout the graph, indicating a variety of observations. It's difficult to discern a clear linear relationship between the two factors. Some data points show high ARD observations coinciding with high values on the x-axis, while others show high ARD observations at lower values on the x-axis. There seems to be a spread of data points across the entire range of both axes.
+This visual representation is valuable for health officials and researchers, highlighting the persistence and gradual increase of ARI rates over two decades and the need for continued, gender-inclusive health strategies. Further, it underscores the importance of maintaining gender-disaggregated data for identifying and addressing any subtle differences in health outcomes over time.
 
-## Graph 6
+## Global Dynamics of Childhood Acute Respiratory Infections: A Time-Lapse View
 ```{python,ECHO=FALSE}
 # Load the data from the uploaded CSV file
 file_path = r'C:\Users\tejas\Downloads\unicef_indicator_2.csv'
@@ -259,22 +269,18 @@ fig.update_traces(hovertemplate='%{customdata[0]}<br>Observation Value: %{z}%')
 
 fig.show()
 ```
-Average Observations of ARDs among children under 5 display diverse trends across different countries, indicating significant variability in ARD prevalence globally. The first takeaway from this graph is the infection rates across the countries. We can classify them as follows - 
 
+The animated world map graphically conveys the average observations of acute respiratory diseases (ARDs) among children under the age of five across various countries, reflecting diverse trends that point to a multifaceted global health landscape. The color intensity on the map corresponds to the infection rates, revealing patterns of ARD prevalence that suggest the influence of a range of factors, from environmental to socioeconomic.
 
-High Infection Rates: Notable countries with high rates of ARD infections among children include Argentina (94.18%), Belarus (91.76%), Bosnia and Herzegovina (88.12%), Cuba (93.81%), Georgia (73.60%), Panama (81.63%), Serbia (91.3%), Ukraine (92.17%), Uruguay (89.9%), Mexico (72.77%), Thailand (82.28%) and Venezuela (72%). 
+Countries like Argentina, Belarus, and Serbia show high infection rates, with percentages soaring above 90%. These figures draw our attention to potential regional issues, healthcare challenges, or environmental factors that might contribute to such elevated levels of ARDs. On the other end of the spectrum, nations such as Botswana, Chad, and Somalia report significantly lower rates, raising questions about the interplay between economic status and health outcomes, as lower infection rates are observed in some lower-income countries, contradicting common assumptions.
 
+The moderate to high infection rates in populous countries like India and Indonesia, along with moderate rates in places like Brazil and Kenya, highlight the diverse healthcare landscapes within these regions. It is evident that ARD prevalence does not correlate neatly with economic indicators. The unexpected high rates in relatively higher-income countries and vice versa suggest that wealth alone does not dictate health outcomes. This indicates the complexity of healthcare efficacy, where infrastructure may exist, but access and quality are not guaranteed.
 
-Moderate to High Infection Rates: Additionally, countries like India (69.24%) and Indonesia (69.55%) show moderate to high rates of ARD infections among children. 
+Environmental conditions, particularly air quality and sanitation, have a palpable impact on ARD rates, as seen in countries with dense populations and pollution challenges. Meanwhile, favorable environmental conditions appear to benefit countries like Bhutan and Mongolia, which enjoy lower ARD rates. This underscores the significant role that clean air and sanitation play in preventing respiratory illnesses among children.
 
+Additionally, socio-cultural factors, including health behaviors and literacy, vaccination coverage, and healthcare access, are essential considerations. For instance, Japan and South Korea, with their high health literacy and comprehensive vaccination programs, display different prevalence rates when compared to countries with more limited healthcare access.
 
-Moderate Infection Rates: Many countries fall within the moderate range of ARD infections, such as Albania (67.03%), Armenia (42.46%), Bangladesh (34.52%), Brazil (49.73%), Colombia (61.19%), Kenya (56.86%), and Philippines (57.41%), among others. 
-
-
-Low Infection Rates: Some countries exhibit relatively lower rates of ARD infections among children, including Botswana (14.33%), Chad (20.63%), Somalia (17.72%), and Togo (34.56%), among others.
-
-
-This graph also allows us to draw a link between countries and infection rates. Examining acute respiratory disease (ARD) prevalence rates across countries unveils distinct regional patterns. Countries in sub-Saharan Africa, such as Angola, Benin, and Burkina Faso, showcase elevated ARD prevalence rates compared to other regions. This suggests common regional factors, including environmental conditions, healthcare infrastructure, and socio-economic status, contributing to this trend. Surprisingly, disparities emerge when correlating ARD prevalence rates with economic indicators. Higher-income countries like Argentina and Cuba demonstrate relatively higher ARD prevalence rates, while lower-income countries like Botswana and Somalia exhibit lower rates. This complex relationship challenges the assumption of a straightforward correlation between economic development and health outcomes. Furthermore, countries with robust healthcare infrastructure, such as Costa Rica and Thailand, coexist with high ARD prevalence rates, raising questions about healthcare access and quality. Environmental factors, including air quality and sanitation, also influence ARD prevalence rates, with countries like Bangladesh and India showing higher rates due to population density and pollution. Conversely, countries with better environmental conditions, like Bhutan and Mongolia, exhibit lower ARD prevalence rates. Additionally, socio-cultural factors and health behaviors play a significant role, as evidenced by variations in ARD prevalence rates between countries like Japan and South Korea, with high health literacy and vaccination coverage, and those like Afghanistan and Niger, with lower health literacy and limited healthcare access.
+In conclusion, the map does more than just chart out data—it tells a story of varying health landscapes, challenges, and triumphs. It serves as a potent reminder for global health entities to consider a tapestry of factors when addressing childhood ARDs, from economic conditions and healthcare access to environmental quality and societal behaviors.
 
 ## Conclusion
 
